@@ -1,34 +1,26 @@
 import React, { Component } from 'react';
 import { Card,CardImg,CardBody,CardTitle,CardText,CardImgOverlay} from 'reactstrap';
+import DishDetail from './DishDetailComponent.js';
+
 
 class Menu extends Component {
     constructor(props) {
         super(props);
         this.state = {
            selectedDish : []	
-        };        
+        };  
+
+        console.log("Menu Component constructor invoked");      
     }
+
 
      onDishSelect (dish){
         	this.setState({selectedDish : dish});
     }
 
-    renderDish(dish){
-    	if(dish == null){
-    		return (
-    			<div></div>
-    		);
-    	} else{
-    		return(
-				 <Card>
-                    <CardImg top src={dish.image} alt={dish.name} />
-                    <CardBody>
-                      <CardTitle>{dish.name}</CardTitle>
-                      <CardText>{dish.description}</CardText>
-                    </CardBody>
-                </Card>
-    		);
-    	}
+
+    componentDidMount(){
+    	console.log("Menu Component componentDidMount invoked");
     }
 
     render() {
@@ -44,18 +36,20 @@ class Menu extends Component {
               </div>
             );
         });
+		
+		console.log("Menu Component render invoked");
 
         return (
-          <div className="container">
-            <div className="row">
-                  {menu}
-            </div>
-             <div className="row">
+            <div className="container">
+                <div className="row">
+                    {menu}
+                </div>
+                <div className="row">
                   <div  className="col-12 col-md-5 m-1">
-                    {this.renderDish(this.state.selectedDish)}
+                    <DishDetail dish = {this.state.selectedDish}/>
                   </div>
-             </div> 
-          </div>
+                </div>
+            </div>
         );
     }
 }
