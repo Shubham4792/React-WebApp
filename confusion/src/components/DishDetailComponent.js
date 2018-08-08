@@ -18,18 +18,16 @@ class DishDetail extends Component {
             const commentss = comments.map((ind) => {
                 const dat = new Date(ind.date);
             return (
-              <Media tag = "li">
-                <div className="m-3">{ind.comment}</div>
-                <div className="m-3">-- {ind.author}, {dat.toDateString()}</div>
-              </Media>
+                <div key={ind.id}>
+                        <div className="m-3">{ind.comment}</div>
+                        <div className="m-3">-- {ind.author}, {dat.toDateString()}</div>
+                </div>
             );
         });
             return (
                 <div>
                     <h4> Comments</h4>
-                    <Media list>
                     {commentss}
-                    </Media>
                 </div>
             ); 
         }
@@ -43,7 +41,9 @@ class DishDetail extends Component {
             );
         } else{
             return(
-             <div className="row">
+            <div className="container">
+              <div className="row">
+
                 <div  className="col-12 col-md-5 m-1">
                   <Card>
                     <CardImg top src={dish.image} alt={dish.name} />
@@ -57,7 +57,8 @@ class DishDetail extends Component {
                 <div  className="col-12 col-md-5 m-1">
                     {this.renderComments(dish.comments)}
                 </div>
-             </div>
+              </div>
+            </div>
             );
         }
     }
