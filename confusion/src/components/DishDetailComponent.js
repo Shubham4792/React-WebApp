@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Media, Card,CardImg,CardBody,CardTitle,CardText,CardImgOverlay} from 'reactstrap';
+import {Card,CardImg,CardBody,CardTitle,CardText} from 'reactstrap';
 
 class DishDetail extends Component {
     constructor(props) {
@@ -9,6 +9,14 @@ class DishDetail extends Component {
         };      
     }
 
+    componentDidMount(){
+        console.log("DishDetail componentDidMount invoked");
+    }
+
+    componentDidUpdate(){
+        console.log("DishDetail componentDidUpdate invoked");
+    }
+
     renderComments(comments){
         if(comments == null){
             return (
@@ -16,11 +24,12 @@ class DishDetail extends Component {
             );
         } else{
             const commentss = comments.map((ind) => {
-                const dat = new Date(ind.date);
+                const dat = new Intl.DateTimeFormat('en-US', 
+                        { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(ind.date)));
             return (
                 <div key={ind.id}>
                         <div className="m-3">{ind.comment}</div>
-                        <div className="m-3">-- {ind.author}, {dat.toDateString()}</div>
+                        <div className="m-3">-- {ind.author}, {dat}</div>
                 </div>
             );
         });
